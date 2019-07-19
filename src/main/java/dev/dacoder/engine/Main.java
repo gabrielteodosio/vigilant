@@ -25,7 +25,7 @@ public class Main implements Runnable {
     private long window;
 
     public void run() {
-        System.out.println("Vigilant Engine Started! [" + Version.getVersion() + ']');
+        System.out.println("Vigilant Engine Started! [LWJGL: " + Version.getVersion() + ']');
 
         init();
         loop();
@@ -95,8 +95,8 @@ public class Main implements Runnable {
     private void update() {
         glfwPollEvents();
 
-        if (InputManager.keys[GLFW_KEY_D]) {
-            System.out.println("D");
+        if (InputManager.keys[GLFW_KEY_ESCAPE]) {
+            glfwSetWindowShouldClose(window, true);
         }
     }
 
