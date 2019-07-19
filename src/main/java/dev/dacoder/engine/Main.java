@@ -1,5 +1,6 @@
 package dev.dacoder.engine;
 
+import jdk.internal.util.xml.impl.Input;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -47,7 +48,7 @@ public class Main implements Runnable {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-        window = glfwCreateWindow(width, height, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(width, height, "Vigilant Engine", NULL, NULL);
         if (window == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -66,6 +67,8 @@ public class Main implements Runnable {
             );
         }
 
+        glfwSetKeyCallback(window, new InputManager());
+
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
@@ -76,18 +79,31 @@ public class Main implements Runnable {
         GL.createCapabilities();
 
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glEnable(GL_DEPTH_TEST);
+        System.out.println("OpenGL: " + glGetString(GL_VERSION));
 
         while (running) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            glfwSwapBuffers(window);
-
-            glfwPollEvents();
+            update();
+            render();
 
             if (glfwWindowShouldClose(window)) {
                 running = false;
             }
         }
+    }
+
+    private void update() {
+        glfwPollEvents();
+
+        if (InputManager.keys[GLFW_KEY_D]) {
+            System.out.println("D");
+        }
+    }
+
+    private void render() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glfwSwapBuffers(window);
     }
 
     public static void main(String[] args) {

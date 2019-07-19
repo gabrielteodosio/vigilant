@@ -3,7 +3,7 @@ package dev.dacoder.engine;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
-public class KeyboardInputListener extends GLFWKeyCallback {
+public class InputManager extends GLFWKeyCallback {
 
     public static boolean[] keys = new boolean[65536];
 
