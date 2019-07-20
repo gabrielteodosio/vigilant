@@ -1,4 +1,4 @@
-package dev.dacoder.engine;
+package dev.dacoder.engine.input;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
